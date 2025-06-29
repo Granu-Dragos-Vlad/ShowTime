@@ -1,7 +1,16 @@
 
+using Microsoft.EntityFrameworkCore;
 using ShowTime.Components;
+using ShowTime.DataAcces;
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("ShowTimeContext");
+
+builder.Services.AddDbContext<ShowTimeDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
